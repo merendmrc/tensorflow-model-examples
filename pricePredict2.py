@@ -42,21 +42,22 @@ x_data = clean_data.drop("price", axis=1).values
 y_data = clean_data["price"].values
 
 x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.3, random_state=42)
-scaler = MinMaxScaler()
-x_train = scaler.fit_transform(x_train)
-x_test = scaler.transform(x_test)
+sscaler = MinMaxScaler()
+sscaler = sscaler.fit(x_train)
+
+x_test = sscaler.transform(x_test)
+x_train = sscaler.transform(x_train)
 
 # modelling
 model = Sequential()
-model.add(Dense(8,activation="relu"))
-model.add(Dense(8,activation="relu"))
-model.add(Dense(8,activation="relu"))
-model.add(Dense(8,activation="relu"))
-model.add(Dense(8,activation="relu"))
+model.add(Dense(6,activation="relu"))
+model.add(Dense(6,activation="relu"))
+model.add(Dense(6,activation="relu"))
+model.add(Dense(6,activation="relu"))
 model.add(Dense(1))
 model.compile(optimizer="adam", loss="mse")
 
-model.fit(x= x_train, y= y_train, batch_size=32 , validation_data=(x_test,y_test), epochs=300)
+model.fit(x= x_train, y= y_train, batch_size=32 , validation_data=(x_test,y_test), epochs=250)
 loss_data = pd.DataFrame(model.history.history)
 
 preds = model.predict(x_test)
