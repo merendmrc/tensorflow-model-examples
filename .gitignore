@@ -27,4 +27,4 @@ Thumbs.db
 # Ignore other common files
 *.sqlite3
 
-test.py
+test.ipybn
